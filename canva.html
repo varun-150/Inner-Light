@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerLight - AI Spiritual Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .meditation-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🕉️</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">InnerLight</h1>
+                        <p class="text-sm opacity-90">AI Spiritual Guide</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <select id="spiritualPath" class="bg-white bg-opacity-20 text-white rounded-lg px-3 py-2 text-sm border-0 focus:ring-2 focus:ring-white focus:ring-opacity-50">
+                        <option value="vedanta">Vedanta</option>
+                        <option value="buddhism">Buddhism</option>
+                        <option value="stoicism">Stoicism</option>
+                        <option value="taoism">Taoism</option>
+                        <option value="universal">Universal Wisdom</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Daily Wisdom Section -->
+        <section class="mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+                <div class="text-center">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Daily Wisdom</h2>
+                    <div id="dailyWisdom" class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 mb-6">
+                        <blockquote class="text-lg text-gray-700 italic mb-4" id="wisdomQuote">
+                            "The mind is everything. What you think you become."
+                        </blockquote>
+                        <p class="text-sm text-gray-600" id="wisdomSource">- Buddha</p>
+                    </div>
+                    <div class="bg-yellow-50 rounded-xl p-4">
+                        <h3 class="font-medium text-gray-800 mb-2">Today's Reflection</h3>
+                        <p class="text-gray-600 text-sm" id="reflectionPrompt">
+                            How can you cultivate mindfulness in your daily activities today?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Cards Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- Ask the Guru -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer" onclick="openFeature('guru')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🧘‍♂️</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Ask the Guru</h3>
+                    <p class="text-gray-600 text-sm">Get spiritual guidance for life's questions</p>
+                </div>
+            </div>
+
+            <!-- Meditation Guide -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer" onclick="openFeature('meditation')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🧘</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Meditation Guide</h3>
+                    <p class="text-gray-600 text-sm">Guided mindfulness practices</p>
+                </div>
+            </div>
+
+            <!-- Spiritual Journal -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer" onclick="openFeature('journal')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">📔</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Spiritual Journal</h3>
+                    <p class="text-gray-600 text-sm">Record your daily reflections</p>
+                </div>
+            </div>
+
+            <!-- Growth Tracker -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer" onclick="openFeature('tracker')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">📈</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Growth Tracker</h3>
+                    <p class="text-gray-600 text-sm">Monitor your emotional journey</p>
+                </div>
+            </div>
+
+            <!-- Community -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer" onclick="openFeature('community')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🤝</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Community</h3>
+                    <p class="text-gray-600 text-sm">Connect with fellow seekers</p>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 card-hover cursor-pointer" onclick="openFeature('settings')">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">⚙️</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Settings</h3>
+                    <p class="text-gray-600 text-sm">Customize your experience</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Feature Modals -->
+    <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" onclick="closeModal()">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wisdom database organized by spiritual path
+        const wisdomDatabase = {
+            vedanta: [
+                { quote: "You are not the body, you are not the mind, you are the eternal Self.", source: "Advaita Vedanta", reflection: "How can you connect with your true Self beyond physical and mental identities today?" },
+                { quote: "The wave is nothing but water. The individual is nothing but Brahman.", source: "Swami Vivekananda", reflection: "In what ways can you recognize the divine unity in all beings around you?" }
+            ],
+            buddhism: [
+                { quote: "The mind is everything. What you think you become.", source: "Buddha", reflection: "How can you cultivate mindfulness in your daily activities today?" },
+                { quote: "Peace comes from within. Do not seek it without.", source: "Buddha", reflection: "What inner practices can help you find peace regardless of external circumstances?" }
+            ],
+            stoicism: [
+                { quote: "You have power over your mind - not outside events. Realize this, and you will find strength.", source: "Marcus Aurelius", reflection: "What aspects of your life can you focus on controlling today?" },
+                { quote: "The happiness of your life depends upon the quality of your thoughts.", source: "Marcus Aurelius", reflection: "How can you cultivate more positive and constructive thoughts?" }
+            ],
+            taoism: [
+                { quote: "The journey of a thousand miles begins with one step.", source: "Lao Tzu", reflection: "What small step can you take today toward your spiritual growth?" },
+                { quote: "When I let go of what I am, I become what I might be.", source: "Lao Tzu", reflection: "What attachments or expectations can you release to allow growth?" }
+            ],
+            universal: [
+                { quote: "Be yourself; everyone else is already taken.", source: "Oscar Wilde", reflection: "How can you honor your authentic self in your interactions today?" },
+                { quote: "The only way to do great work is to love what you do.", source: "Steve Jobs", reflection: "What activities bring you joy and how can you incorporate more of them?" }
+            ]
+        };
+
+        // Current user data
+        let userData = {
+            spiritualPath: 'buddhism',
+            journalEntries: JSON.parse(localStorage.getItem('innerlight_journal') || '[]'),
+            moodData: JSON.parse(localStorage.getItem('innerlight_mood') || '[]'),
+            preferences: JSON.parse(localStorage.getItem('innerlight_preferences') || '{}')
+        };
+
+        // Initialize app
+        function initializeApp() {
+            updateDailyWisdom();
+            document.getElementById('spiritualPath').value = userData.spiritualPath;
+            document.getElementById('spiritualPath').addEventListener('change', function(e) {
+                userData.spiritualPath = e.target.value;
+                updateDailyWisdom();
+            });
+        }
+
+        // Update daily wisdom based on selected path
+        function updateDailyWisdom() {
+            const wisdom = wisdomDatabase[userData.spiritualPath];
+            const todayWisdom = wisdom[Math.floor(Math.random() * wisdom.length)];
+            
+            document.getElementById('wisdomQuote').textContent = `"${todayWisdom.quote}"`;
+            document.getElementById('wisdomSource').textContent = `- ${todayWisdom.source}`;
+            document.getElementById('reflectionPrompt').textContent = todayWisdom.reflection;
+        }
+
+        // Open feature modal
+        function openFeature(feature) {
+            const modal = document.getElementById('modalOverlay');
+            const content = document.getElementById('modalContent');
+            
+            switch(feature) {
+                case 'guru':
+                    content.innerHTML = createGuruInterface();
+                    break;
+                case 'meditation':
+                    content.innerHTML = createMeditationInterface();
+                    break;
+                case 'journal':
+                    content.innerHTML = createJournalInterface();
+                    break;
+                case 'tracker':
+                    content.innerHTML = createTrackerInterface();
+                    break;
+                case 'community':
+                    content.innerHTML = createCommunityInterface();
+                    break;
+                case 'settings':
+                    content.innerHTML = createSettingsInterface();
+                    break;
+            }
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Create Guru interface
+        function createGuruInterface() {
+            return `
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Ask the Guru</h2>
+                        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                    </div>
+                    
+                    <div id="chatMessages" class="bg-gray-50 rounded-xl p-4 h-64 overflow-y-auto mb-4">
+                        <div class="text-center text-gray-500 text-sm">Ask any question about life, spirituality, or personal growth...</div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <input type="text" id="guruQuestion" placeholder="What's on your mind?" 
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                               onkeypress="if(event.key==='Enter') askGuru()">
+                        <button onclick="askGuru()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                            Ask
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Meditation interface
+        function createMeditationInterface() {
+            return `
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Meditation Guide</h2>
+                        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="bg-blue-50 rounded-xl p-4 cursor-pointer hover:bg-blue-100 transition-colors" onclick="startMeditation('breathing')">
+                            <h3 class="font-semibold text-gray-800 mb-2">🌬️ Breathing Meditation</h3>
+                            <p class="text-sm text-gray-600">5-minute guided breathing exercise</p>
+                        </div>
+                        <div class="bg-green-50 rounded-xl p-4 cursor-pointer hover:bg-green-100 transition-colors" onclick="startMeditation('body')">
+                            <h3 class="font-semibold text-gray-800 mb-2">🧘 Body Scan</h3>
+                            <p class="text-sm text-gray-600">10-minute body awareness practice</p>
+                        </div>
+                        <div class="bg-purple-50 rounded-xl p-4 cursor-pointer hover:bg-purple-100 transition-colors" onclick="startMeditation('loving')">
+                            <h3 class="font-semibold text-gray-800 mb-2">💝 Loving Kindness</h3>
+                            <p class="text-sm text-gray-600">7-minute compassion meditation</p>
+                        </div>
+                        <div class="bg-yellow-50 rounded-xl p-4 cursor-pointer hover:bg-yellow-100 transition-colors" onclick="startMeditation('walking')">
+                            <h3 class="font-semibold text-gray-800 mb-2">🚶 Walking Meditation</h3>
+                            <p class="text-sm text-gray-600">Mindful movement practice</p>
+                        </div>
+                    </div>
+                    
+                    <div id="meditationPlayer" class="hidden bg-gradient-to-r from-purple-100 to-blue-100 rounded-xl p-6 text-center">
+                        <div class="meditation-pulse w-20 h-20 bg-white bg-opacity-50 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-3xl">🧘</span>
+                        </div>
+                        <h3 id="meditationTitle" class="text-xl font-semibold text-gray-800 mb-2"></h3>
+                        <div id="meditationTimer" class="text-3xl font-bold text-purple-600 mb-4">5:00</div>
+                        <div id="meditationInstructions" class="text-gray-700 mb-4"></div>
+                        <button id="meditationControl" onclick="toggleMeditation()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                            Start
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Journal interface
+        function createJournalInterface() {
+            return `
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Spiritual Journal</h2>
+                        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-gray-800 mb-3">Today's Entry</h3>
+                        <textarea id="journalEntry" placeholder="How are you feeling today? What insights have you gained?" 
+                                  class="w-full h-32 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"></textarea>
+                        
+                        <div class="mt-4 flex items-center space-x-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Mood</label>
+                                <select id="moodSelect" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                    <option value="peaceful">😌 Peaceful</option>
+                                    <option value="grateful">🙏 Grateful</option>
+                                    <option value="reflective">🤔 Reflective</option>
+                                    <option value="energized">⚡ Energized</option>
+                                    <option value="challenged">😤 Challenged</option>
+                                    <option value="confused">😕 Confused</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <button onclick="saveJournalEntry()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Save Entry
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-gray-800 mb-3">Recent Entries</h3>
+                        <div id="recentEntries" class="space-y-3 max-h-48 overflow-y-auto">
+                            ${renderRecentEntries()}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Tracker interface
+        function createTrackerInterface() {
+            return `
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Growth Tracker</h2>
+                        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-xl p-4">
+                            <h3 class="font-semibold text-gray-800 mb-3">Mood Trends</h3>
+                            <div class="space-y-2">
+                                ${renderMoodChart()}
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-xl p-4">
+                            <h3 class="font-semibold text-gray-800 mb-3">Practice Stats</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Journal Entries</span>
+                                    <span class="font-semibold">${userData.journalEntries.length}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Meditation Sessions</span>
+                                    <span class="font-semibold">12</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Days Active</span>
+                                    <span class="font-semibold">7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-purple-50 rounded-xl p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3">Insights</h3>
+                        <p class="text-gray-700 text-sm">
+                            Your most common mood this week has been "peaceful" 😌. You've shown consistent growth in mindfulness practices. 
+                            Consider exploring deeper meditation techniques to continue your journey.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Community interface
+        function createCommunityInterface() {
+            return `
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Community</h2>
+                        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                    </div>
+                    
+                    <div class="text-center py-8">
+                        <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-4xl">🤝</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Coming Soon</h3>
+                        <p class="text-gray-600 mb-6">Connect with fellow spiritual seekers, share insights, and grow together in a supportive community.</p>
+                        
+                        <div class="bg-pink-50 rounded-xl p-4 text-left">
+                            <h4 class="font-semibold text-gray-800 mb-2">Planned Features:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Discussion groups by spiritual path</li>
+                                <li>• Weekly wisdom sharing circles</li>
+                                <li>• Meditation buddy matching</li>
+                                <li>• Anonymous support forums</li>
+                                <li>• Virtual retreats and workshops</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Settings interface
+        function createSettingsInterface() {
+            return `
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Settings</h2>
+                        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-3">Notifications</h3>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded text-purple-600 focus:ring-purple-500" checked>
+                                    <span class="ml-2 text-gray-700">Daily wisdom notifications</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded text-purple-600 focus:ring-purple-500" checked>
+                                    <span class="ml-2 text-gray-700">Meditation reminders</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded text-purple-600 focus:ring-purple-500">
+                                    <span class="ml-2 text-gray-700">Weekly progress reports</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-3">Privacy</h3>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded text-purple-600 focus:ring-purple-500" checked>
+                                    <span class="ml-2 text-gray-700">Keep journal entries private</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded text-purple-600 focus:ring-purple-500">
+                                    <span class="ml-2 text-gray-700">Share anonymous insights with community</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-3">Data</h3>
+                            <div class="space-y-2">
+                                <button onclick="exportData()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                    Export My Data
+                                </button>
+                                <button onclick="clearData()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm ml-2">
+                                    Clear All Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Guru functionality
+        function askGuru() {
+            const question = document.getElementById('guruQuestion').value.trim();
+            if (!question) return;
+            
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Add user question
+            chatMessages.innerHTML += `
+                <div class="mb-4 text-right">
+                    <div class="inline-block bg-purple-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                        ${question}
+                    </div>
+                </div>
+            `;
+            
+            // Generate AI response based on spiritual path
+            setTimeout(() => {
+                const response = generateGuruResponse(question, userData.spiritualPath);
+                chatMessages.innerHTML += `
+                    <div class="mb-4">
+                        <div class="inline-block bg-gray-200 text-gray-800 rounded-lg px-4 py-2 max-w-xs">
+                            ${response}
+                        </div>
+                    </div>
+                `;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+            
+            document.getElementById('guruQuestion').value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Generate guru response
+        function generateGuruResponse(question, path) {
+            const responses = {
+                vedanta: [
+                    "Remember, you are not the doer. Surrender the fruits of your actions and find peace in non-attachment.",
+                    "The Self you seek is already within you. Look beyond the mind and body to discover your true nature.",
+                    "All suffering comes from identification with the temporary. Rest in the awareness that you are eternal consciousness."
+                ],
+                buddhism: [
+                    "Suffering arises from attachment. Practice letting go and observe how this changes your relationship with the situation.",
+                    "Everything is impermanent. This too shall pass. Find peace in accepting the changing nature of all things.",
+                    "Cultivate compassion for yourself and others. Understanding leads to wisdom, wisdom leads to liberation."
+                ],
+                stoicism: [
+                    "Focus on what is within your control. Accept what is not, and find strength in your response to circumstances.",
+                    "This challenge is an opportunity to practice virtue. How can you respond with wisdom, justice, courage, and temperance?",
+                    "Your thoughts create your reality. Choose thoughts that serve your highest good and the good of others."
+                ],
+                taoism: [
+                    "Flow like water around obstacles. Sometimes the gentlest approach is the most powerful.",
+                    "Return to simplicity. What would happen if you approached this situation with childlike wonder?",
+                    "Trust the natural order. Sometimes not-doing is the most effective action."
+                ]
+            };
+            
+            const pathResponses = responses[path] || responses.buddhism;
+            return pathResponses[Math.floor(Math.random() * pathResponses.length)];
+        }
+
+        // Meditation functionality
+        let meditationTimer = null;
+        let meditationTime = 0;
+        let meditationDuration = 0;
+
+        function startMeditation(type) {
+            const meditations = {
+                breathing: { title: "Breathing Meditation", duration: 300, instructions: "Focus on your breath. Inhale slowly, exhale completely." },
+                body: { title: "Body Scan", duration: 600, instructions: "Start from your toes and slowly move your attention up through your body." },
+                loving: { title: "Loving Kindness", duration: 420, instructions: "Send love to yourself, then to loved ones, then to all beings." },
+                walking: { title: "Walking Meditation", duration: 480, instructions: "Walk slowly and mindfully, feeling each step." }
+            };
+            
+            const meditation = meditations[type];
+            document.getElementById('meditationPlayer').classList.remove('hidden');
+            document.getElementById('meditationTitle').textContent = meditation.title;
+            document.getElementById('meditationInstructions').textContent = meditation.instructions;
+            
+            meditationTime = meditation.duration;
+            meditationDuration = meditation.duration;
+            updateMeditationTimer();
+        }
+
+        function toggleMeditation() {
+            const control = document.getElementById('meditationControl');
+            
+            if (meditationTimer) {
+                clearInterval(meditationTimer);
+                meditationTimer = null;
+                control.textContent = 'Resume';
+            } else {
+                meditationTimer = setInterval(() => {
+                    meditationTime--;
+                    updateMeditationTimer();
+                    
+                    if (meditationTime <= 0) {
+                        clearInterval(meditationTimer);
+                        meditationTimer = null;
+                        control.textContent = 'Complete!';
+                        control.disabled = true;
+                    }
+                }, 1000);
+                control.textContent = 'Pause';
+            }
+        }
+
+        function updateMeditationTimer() {
+            const minutes = Math.floor(meditationTime / 60);
+            const seconds = meditationTime % 60;
+            document.getElementById('meditationTimer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Journal functionality
+        function saveJournalEntry() {
+            const entry = document.getElementById('journalEntry').value.trim();
+            const mood = document.getElementById('moodSelect').value;
+            
+            if (!entry) return;
+            
+            const journalEntry = {
+                id: Date.now(),
+                date: new Date().toISOString().split('T')[0],
+                entry: entry,
+                mood: mood,
+                timestamp: new Date().toISOString()
+            };
+            
+            userData.journalEntries.unshift(journalEntry);
+            userData.moodData.push({ date: journalEntry.date, mood: mood });
+            
+            localStorage.setItem('innerlight_journal', JSON.stringify(userData.journalEntries));
+            localStorage.setItem('innerlight_mood', JSON.stringify(userData.moodData));
+            
+            document.getElementById('journalEntry').value = '';
+            document.getElementById('recentEntries').innerHTML = renderRecentEntries();
+            
+            alert('Journal entry saved! 📝');
+        }
+
+        function renderRecentEntries() {
+            if (userData.journalEntries.length === 0) {
+                return '<div class="text-gray-500 text-sm text-center py-4">No entries yet. Start writing!</div>';
+            }
+            
+            return userData.journalEntries.slice(0, 3).map(entry => `
+                <div class="bg-gray-50 rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-800">${entry.date}</span>
+                        <span class="text-sm">${getMoodEmoji(entry.mood)}</span>
+                    </div>
+                    <p class="text-sm text-gray-600">${entry.entry.substring(0, 100)}${entry.entry.length > 100 ? '...' : ''}</p>
+                </div>
+            `).join('');
+        }
+
+        function getMoodEmoji(mood) {
+            const emojis = {
+                peaceful: '😌',
+                grateful: '🙏',
+                reflective: '🤔',
+                energized: '⚡',
+                challenged: '😤',
+                confused: '😕'
+            };
+            return emojis[mood] || '😊';
+        }
+
+        function renderMoodChart() {
+            const moodCounts = userData.moodData.reduce((acc, entry) => {
+                acc[entry.mood] = (acc[entry.mood] || 0) + 1;
+                return acc;
+            }, {});
+            
+            if (Object.keys(moodCounts).length === 0) {
+                return '<div class="text-gray-500 text-sm">No mood data yet</div>';
+            }
+            
+            return Object.entries(moodCounts).map(([mood, count]) => `
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">${getMoodEmoji(mood)} ${mood}</span>
+                    <div class="flex-1 mx-3 bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: ${(count / userData.moodData.length) * 100}%"></div>
+                    </div>
+                    <span class="text-sm font-medium">${count}</span>
+                </div>
+            `).join('');
+        }
+
+        // Settings functionality
+        function exportData() {
+            const data = {
+                journalEntries: userData.journalEntries,
+                moodData: userData.moodData,
+                preferences: userData.preferences,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'innerlight-data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearData() {
+            if (confirm('Are you sure you want to clear all your data? This cannot be undone.')) {
+                localStorage.removeItem('innerlight_journal');
+                localStorage.removeItem('innerlight_mood');
+                localStorage.removeItem('innerlight_preferences');
+                userData.journalEntries = [];
+                userData.moodData = [];
+                userData.preferences = {};
+                alert('All data cleared.');
+                closeModal();
+            }
+        }
+
+        // Initialize the app
+        initializeApp();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97aeb98c43154850',t:'MTc1NzE2OTY2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
