@@ -193,6 +193,11 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'InnerLight Backend is running' });
 });
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'InnerLight Backend API', status: 'running' });
+});
+
 // Clean up expired OTPs every minute
 setInterval(() => {
     const now = Date.now();
